@@ -20,20 +20,15 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+    	
+    	Scene s = new Scene(new Ventana().getRoot(),500,500);
+    	primaryStage.setTitle("Tarea01-Aspectos");
+    	primaryStage.setScene(s);
+    	primaryStage.setResizable(false);
+    	primaryStage.show();
+    	
+       
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
-        primaryStage.show();
+        
     }
 }
