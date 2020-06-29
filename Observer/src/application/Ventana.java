@@ -7,15 +7,21 @@ import javafx.scene.layout.VBox;
 public class Ventana {
 	
 	private VBox root = new VBox(10);
+	private String texto = "Azul";
 	private Button btAzul = new Button("Azul");
 	private Button btRojo = new Button("Rojo");
 	private Button btAmarillo = new Button("Amarillo");
 	
 	public Ventana() {
-		btRojo();
+		/*btRojo();
 		btAzul();
-		btAmarillo();
+		btAmarillo();*/
 		Controles();
+		btAzul.setOnMouseClicked(e-> cambiofondo(btAzul.getText()));
+		btRojo.setOnMouseClicked(e-> cambiofondo(btRojo.getText()));
+		btAmarillo.setOnMouseClicked(e-> cambiofondo(btAmarillo.getText()));
+		
+		
 	}
 	
 	private void Controles() {
@@ -39,10 +45,10 @@ public class Ventana {
 	public VBox getRoot() {
 		return root;
 	}
-	
+	/*
 	private void btAzul() {
 		//Cambio de color de fondo blue
-		btAzul.setOnAction(e-> root.setStyle("-fx-background-color:BLUE"));
+		btAzul.setOnMouseClicked(e-> root.setStyle("-fx-background-color:BLUE"));
 		//listeners
 		btAzul.textProperty().addListener((s, oldValue, newValue) -> {
 	            System.out.println("Se esta cambiando de color de fondo");
@@ -61,6 +67,21 @@ public class Ventana {
 		//Cambio de color de fondo yellow
 		btAmarillo.setOnAction(e-> root.setStyle("-fx-background-color: yellow"));
 	}
-
+	*/
+	
+	private void cambiofondo(String s) {
+		VBox rt = getRoot();
+		if(s == "Azul") {
+			rt.setStyle("-fx-background-color:BLUE");
+		}else if (s == "Rojo") {
+			rt.setStyle("-fx-background-color:RED");
+		}else {
+			rt.setStyle("-fx-background-color: yellow");
+		}
+	}
+	
+	public String getTexto() {
+		return texto;
+	}
 	
 }
