@@ -1,27 +1,33 @@
 package application;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class Ventana {
+public class Ventana extends Observable{
 	
 	private VBox root = new VBox(10);
-	private String texto = "Azul";
 	private Button btAzul = new Button("Azul");
 	private Button btRojo = new Button("Rojo");
 	private Button btAmarillo = new Button("Amarillo");
+	Usuario us;
 	
+	private Observer observer;
+	/*
+	 * Constructor 
+	 */
 	public Ventana() {
-		/*btRojo();
-		btAzul();
-		btAmarillo();*/
+
 		Controles();
-		btAzul.setOnMouseClicked(e-> cambiofondo(btAzul.getText()));
-		btRojo.setOnMouseClicked(e-> cambiofondo(btRojo.getText()));
-		btAmarillo.setOnMouseClicked(e-> cambiofondo(btAmarillo.getText()));
-		
-		
+		btAzul.setOnMouseClicked(e-> {cambiofondo(btAzul.getText());
+								System.out.println(btAzul.getText());});
+		btRojo.setOnMouseClicked(e-> {cambiofondo(btRojo.getText());
+								System.out.println(btRojo.getText());});
+		btAmarillo.setOnMouseClicked(e-> {cambiofondo(btAmarillo.getText());
+								System.out.println(btAmarillo.getText());});			
 	}
 	
 	private void Controles() {
@@ -31,57 +37,43 @@ public class Ventana {
 		root.setAlignment(Pos.CENTER);
 		//
 		root.getChildren().addAll(btAzul,btRojo,btAmarillo);
-		//Cambio de tamaño de boton azul
+		//Cambio de tamaÃ±o de boton azul
 		btAzul.setPrefSize(100, 20);
-		//Cambio de tamaño de boton rojo
+		//Cambio de tamaÃ±o de boton rojo
 		btRojo.setPrefSize(100, 20);
-		//Cambio de tamaño de boton amarillo
-		btAmarillo.setPrefSize(100,20);
-	
-		
+		//Cambio de tamaÃ±o de boton amarillo
+		btAmarillo.setPrefSize(100,20);		
 	}	
 
-	
 	public VBox getRoot() {
 		return root;
 	}
-	/*
-	private void btAzul() {
-		//Cambio de color de fondo blue
-		btAzul.setOnMouseClicked(e-> root.setStyle("-fx-background-color:BLUE"));
-		//listeners
-		btAzul.textProperty().addListener((s, oldValue, newValue) -> {
-	            System.out.println("Se esta cambiando de color de fondo");
-	    });
-		
-	}
-	
-	public void btRojo() {
-		
-		//Cambio de Color de fondo red
-		btRojo.setOnAction(e-> root.setStyle("-fx-background-color:RED"));
-		
-	}
-	
-	private void btAmarillo() {
-		//Cambio de color de fondo yellow
-		btAmarillo.setOnAction(e-> root.setStyle("-fx-background-color: yellow"));
-	}
-	*/
+
 	
 	private void cambiofondo(String s) {
 		VBox rt = getRoot();
 		if(s == "Azul") {
 			rt.setStyle("-fx-background-color:BLUE");
+			//texto = "Azul";
 		}else if (s == "Rojo") {
 			rt.setStyle("-fx-background-color:RED");
+			//texto = "Rojo";
 		}else {
 			rt.setStyle("-fx-background-color: yellow");
+			//texto = "Amarillo";
 		}
+		notifyObservers();
 	}
+
 	
-	public String getTexto() {
-		return texto;
+	@Override
+	public void addObserver(Observer observer) {
+		this.observer = observer;
+	}
+	@Override
+	public void notifyObservers() {
+		if(observer != null)
+			observer.update(this, "fondo");
 	}
 	
 }

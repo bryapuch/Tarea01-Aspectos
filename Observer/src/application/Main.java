@@ -11,15 +11,14 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-    	
-    	Scene s = new Scene(new Ventana().getRoot(),500,500);
+    	Ventana vn = new Ventana();
+    	Usuario us = new Usuario();
+    	vn.addObserver(us);
+    	Scene s = new Scene(vn.getRoot(),500,500);
     	primaryStage.setTitle("Tarea01-Aspectos");
     	primaryStage.setScene(s);
     	primaryStage.setResizable(false);
     	primaryStage.show();
-    	
-       
-        
-        
+      
     }
 }
