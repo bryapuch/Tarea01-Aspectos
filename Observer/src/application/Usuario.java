@@ -16,5 +16,6 @@ public class Usuario implements Observer{
 
 		System.out.println("Fondo cambiado");	
 		}
+
 	}
 }

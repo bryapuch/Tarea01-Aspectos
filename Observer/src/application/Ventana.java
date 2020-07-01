@@ -2,7 +2,6 @@ package application;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -13,21 +12,20 @@ public class Ventana extends Observable{
 	private Button btAzul = new Button("Azul");
 	private Button btRojo = new Button("Rojo");
 	private Button btAmarillo = new Button("Amarillo");
+	private Button btInicio = new Button("Iniciar");
 	Usuario us;
 	
 	private Observer observer;
-	/*
-	 * Constructor 
-	 */
+	
 	public Ventana() {
-
 		Controles();
 		btAzul.setOnMouseClicked(e-> {cambiofondo(btAzul.getText());
 								System.out.println(btAzul.getText());});
 		btRojo.setOnMouseClicked(e-> {cambiofondo(btRojo.getText());
 								System.out.println(btRojo.getText());});
 		btAmarillo.setOnMouseClicked(e-> {cambiofondo(btAmarillo.getText());
-								System.out.println(btAmarillo.getText());});			
+								System.out.println(btAmarillo.getText());});
+		btInicio.setOnMouseClicked(e-> Inicio());
 	}
 	
 	private void Controles() {
@@ -36,19 +34,21 @@ public class Ventana extends Observable{
 		//
 		root.setAlignment(Pos.CENTER);
 		//
-		root.getChildren().addAll(btAzul,btRojo,btAmarillo);
+		root.getChildren().addAll(btAzul,btRojo,btAmarillo,btInicio);
 		//Cambio de tamaño de boton azul
 		btAzul.setPrefSize(100, 20);
 		//Cambio de tamaño de boton rojo
 		btRojo.setPrefSize(100, 20);
 		//Cambio de tamaño de boton amarillo
-		btAmarillo.setPrefSize(100,20);		
+		btAmarillo.setPrefSize(100,20);
+		//Cambio de tamano de Boton Inicio
+		btInicio.setPrefSize(100,20);
 	}	
 
+	
 	public VBox getRoot() {
 		return root;
 	}
-
 	
 	private void cambiofondo(String s) {
 		VBox rt = getRoot();
@@ -63,17 +63,23 @@ public class Ventana extends Observable{
 			//texto = "Amarillo";
 		}
 		notifyObservers();
+		
 	}
-
+	private void Inicio() {
+		if(btInicio.isPressed() == false) {
+			System.out.println("Exito");	
+		}
+	}
 	
+
 	@Override
 	public void addObserver(Observer observer) {
 		this.observer = observer;
 	}
 	@Override
 	public void notifyObservers() {
-		if(observer != null)
+		if(observer instanceof Usuario)
 			observer.update(this, "fondo");
 	}
 	
-}
+} 
